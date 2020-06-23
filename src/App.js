@@ -5,11 +5,17 @@ function App() {
     const startTime = 3; 
     const [text, setText] = useState('');
     const [timeLeft, setTimeLeft] = useState(startTime); 
+    const [wordCount, setWordCount] = useState(0); 
 
     const handleChange = (e) => {
       const {value} = e.target;
       setText(value); 
     }
+
+    const countTheWords = (text) => {
+      const wordsArr = text.trim().split(' ');
+      return wordsArr.filter(word => word !== ' ').length; 
+    } 
 
     useEffect(() => {
       if (timeLeft > 0) {
@@ -35,7 +41,7 @@ function App() {
             >
                 Start
             </button>
-            {/* <h1>Word count: {}</h1> */}
+            {<h1>Word count: {countTheWords(text)}</h1>}
         </div>
     )
 }
