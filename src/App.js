@@ -24,7 +24,7 @@ function App() {
             <h1>How fast do you type?</h1>
             <textarea
                 // ref={textBoxRef}
-                // onChange={handleChange}
+                onChange={handleChange}
                 value={text}
                 // disabled={!isTimeRunning}
             />
