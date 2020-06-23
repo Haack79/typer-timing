@@ -12,8 +12,11 @@ function App() {
     }
 
     useEffect(() => {
-      setTimeout(time => {
-        setTimeLeft(time - 1)}, 1000)
+      if (timeLeft > 0) {
+        setTimeout(time => {
+          setTimeLeft(time => time - 1)}, 1000)
+      }
+
     }, [timeLeft])
 
     return (
