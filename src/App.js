@@ -2,7 +2,7 @@
 import React, {useState, useEffect, useRef} from "react"
 
 function App() {
-    const startTime = 3; 
+    const startTime = 60; 
     const [text, setText] = useState(" ");
     const [timeLeft, setTimeLeft] = useState(startTime); 
     const [wordCount, setWordCount] = useState(0);
@@ -16,12 +16,10 @@ function App() {
 
     const handleChange = (e) => {
       const {value} = e.target;
-      console.log(value, 'this is the valueeeeeeee');
       setText(value); 
     }
 
     const countTheWords = (text) => {
-      console.log(text, 'this is the text');
       const wordsArr = text.trim().split(" ");
       const totalWords = wordsArr.filter(word => word !== " ").length; 
       setWordCount(totalWords); 
@@ -43,7 +41,7 @@ function App() {
       setWordCount(countTheWords(text));
       setSpeed(wordsPerSecond());  
     }
-    // let finalSpeed; 
+
     useEffect(() => {
       if (timeLeft > 0 && isRunning) {
         setTimeout(() => {
@@ -70,8 +68,8 @@ function App() {
             >
                 Start
             </button>
-            <h1>Word count: {wordCount}</h1>
-            <h1>Speed: {speed}</h1>
+            <h1>{`Word count: ${wordCount} WPM`}</h1>
+            <h1>{`Speed: ${speed} words per second`}</h1>
         </div>
     )
 }
