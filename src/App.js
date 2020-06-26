@@ -1,20 +1,13 @@
 
-import React, {useState, useEffect, useRef} from "react"
-const getWordsPerSecond = (startTime, wordCount) => (wordCount / startTime).toFixed(2);
-const getWordCount = (text) => {
-  const wordsArr = text.trim().split(" ");
-  const totalWords = wordsArr.filter(word => word !== " ").length; 
-  // setWordCount(totalWords); // pull this out and use countWord then set it.  
-  return totalWords; 
-}  
+import React, {useState, useEffect, useRef} from "react";
+import {getWordsPerSecond, getWordCount} from "./appFunctions";
+
 const App = () => {
     const startTime = 10; // this is called derived state
     const [text, setText] = useState(" ");
     const [timeLeft, setTimeLeft] = useState(startTime); 
     // const [wordCount, setWordCount] = useState(0);
     const [isRunning, setIsRunning] = useState(false); 
-                      // gameState
-    // const [speed, setSpeed] = useState(0);  
     
     const textBoxRef = useRef(null); 
 
@@ -33,9 +26,11 @@ const App = () => {
       setIsRunning(true); 
       setText('');
     }
+
     const decrementTime = () => {
       setTimeLeft(time => time - 1);
     }
+
     useEffect(() => {
       if (timeLeft > 0 && isRunning) {
         setTimeout(decrementTime, 1000)
