@@ -7,7 +7,7 @@ const getWordCount = (text) => {
   // setWordCount(totalWords); // pull this out and use countWord then set it.  
   return totalWords; 
 }  
-function App() {
+const App = () => {
     const startTime = 10; // this is called derived state
     const [text, setText] = useState(" ");
     const [timeLeft, setTimeLeft] = useState(startTime); 
@@ -18,26 +18,12 @@ function App() {
     
     const textBoxRef = useRef(null); 
 
-    // const wordsPerSecond = () => {
-    //   console.log(wordCount, startTime); 
-    //   return (wordCount / startTime).toFixed(2); 
-    // }
-    // pull wordsPerSEcond out and count the words into their own functions.  
-
     const handleChange = (e) => {
       const {value} = e.target;
       setText(value);
-      // setWordCount(countTheWords(value)) 
+      // setWordCount(countTheWords(value)) -moved this outside the component. 
     }
 
-
-    // make into pure functions 
-    // use ref on startGame 
-    // use callBack - memoiz
-   // pull timer into it's own function
-   // take on end prop as call back and pass down endgame, 
-   // then can set interval,  say only update timer at specific times , onEnd
-   // create custom hooks, specific to running timer 
     const startGame = () => { 
       // have to set textboxref disabled to false or it won't let me focus on the textbox area
       // it's a weird bug, not sure how else to handle it. 
@@ -47,18 +33,12 @@ function App() {
       setIsRunning(true); 
       setText('');
     }
-    
-    // const {current: endGame} = useRef(() => {
-    //   setIsRunning(false);
-    //   // setWordCount(countTheWords(text));
-    //   // setSpeed(wordsPerSecond());  
-    // })
-    // console.log(typeof endGame, 'in here'); 
+    const decrementTime = () => {
+      setTimeLeft(time => time - 1);
+    }
     useEffect(() => {
       if (timeLeft > 0 && isRunning) {
-        setTimeout(() => {
-          setTimeLeft(time => time - 1)
-        }, 1000)
+        setTimeout(decrementTime, 1000)
       } else if (timeLeft === 0) { 
           setIsRunning(false);
       }
